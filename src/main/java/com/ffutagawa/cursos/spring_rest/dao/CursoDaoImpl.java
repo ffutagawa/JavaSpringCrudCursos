@@ -1,7 +1,9 @@
 package com.ffutagawa.cursos.spring_rest.dao;
 
 import com.ffutagawa.cursos.spring_rest.domain.Curso;
+import com.ffutagawa.cursos.spring_rest.exception.NaoExisteDaoException;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
@@ -26,12 +28,20 @@ public class CursoDaoImpl implements CursoDao {
 
     @Override
     public void delete(Long id) {
-        entityManager.remove(entityManager.getReference(Curso.class, id));;
+        try {
+            entityManager.remove(entityManager.getReference(Curso.class, id));
+        } catch (EntityNotFoundException ex) {
+            throw new NaoExisteDaoException("Curso não encontrado para id = " + id + ".");
+        }
     }
 
     @Override
     public Curso findById(Long id) {
-        return entityManager.find(Curso.class, id);
+        Curso curso = entityManager.find(Curso.class, id);
+        if (curso == null){
+            throw new NaoExisteDaoException("Curso não encontrado para id: " + id);
+        }
+        return curso;
     }
 
     @Override
