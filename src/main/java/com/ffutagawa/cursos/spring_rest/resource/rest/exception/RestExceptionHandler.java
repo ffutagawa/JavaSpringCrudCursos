@@ -1,6 +1,7 @@
 package com.ffutagawa.cursos.spring_rest.resource.rest.exception;
 
 import com.ffutagawa.cursos.spring_rest.domain.DetalheErro;
+import com.ffutagawa.cursos.spring_rest.exception.IdNaoValidoServiceException;
 import com.ffutagawa.cursos.spring_rest.exception.NaoExisteDaoException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -11,10 +12,37 @@ import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.sound.midi.InvalidMidiDataException;
 import java.util.Objects;
 
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
+
+    @ExceptionHandler({IdNaoValidoServiceException.class})
+    public ResponseEntity<Object> idInvalido(IdNaoValidoServiceException ex,
+                                             WebRequest request) {
+        return handleExceptionInternal(
+                ex, DetalheErro.builder()
+                        .addErro(ex.getMessage())
+                        .addStatus(HttpStatus.BAD_REQUEST)
+                        .addHttpMethod(getHttpMethod(request))
+                        .addPath(getPath(request))
+                        .build(),
+                new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
+    @ExceptionHandler({org.hibernate.exception.ConstraintViolationException.class})
+    public ResponseEntity<Object> cpnstrainViolada (org.hibernate.exception.ConstraintViolationException ex, WebRequest request) {
+        return handleExceptionInternal(
+                ex, DetalheErro.builder()
+                        .addDetalhe("Constraint Violada: " + ex.getConstraintName())
+                        .addErro(ex.getMessage())
+                        .addStatus(HttpStatus.CONFLICT)
+                        .addHttpMethod(getHttpMethod(request))
+                        .addPath(getPath(request))
+                        .build(),
+                new HttpHeaders(), HttpStatus.CONFLICT, request);
+    }
 
     @ExceptionHandler({org.hibernate.PropertyValueException.class})
     public ResponseEntity<Object> prorpriedadeNula (org.hibernate.PropertyValueException ex, WebRequest request) {
