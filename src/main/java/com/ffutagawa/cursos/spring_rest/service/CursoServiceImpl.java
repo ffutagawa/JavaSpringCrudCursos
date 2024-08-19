@@ -64,5 +64,9 @@ public class CursoServiceImpl implements CursoService {
         return id;
     }
 
-
+    @Override
+//    @Transactional(readOnly = true)
+    public List<Curso> findAllSemVideoAulas() {
+        return dao.findAllSemVideoAulas();
+    }
 }

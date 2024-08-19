@@ -24,10 +24,18 @@ public class CursoRestController {
     @Autowired
     private CursoService service;
 
+//    @GetMapping
+//    @ResponseStatus(HttpStatus.OK)
+//    public List<Curso> listar(){
+//        return service.findAll();
+//    }
+
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Curso> listar(){
-        return service.findAll();
+    public List<Curso> listar(@RequestParam(name = "fields", required = false, defaultValue = "") String fields){
+        return fields.equals("videoaulas")
+                ? service.findAll()
+                : service.findAllSemVideoAulas();
     }
 
     @GetMapping(value = "/{id}")

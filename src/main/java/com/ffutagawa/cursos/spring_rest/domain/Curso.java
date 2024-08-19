@@ -2,6 +2,7 @@ package com.ffutagawa.cursos.spring_rest.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -34,6 +35,7 @@ public class Curso implements Serializable {
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Date dataInicio;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonIgnoreProperties({"curso"})
     @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL)
     private List<VideoAula> videoaulas;

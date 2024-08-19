@@ -18,4 +18,6 @@ public interface CursoService {
     List<Curso> findAll();
 
     Curso updateDataInicio(Long id, Date dataInicio);
+
+    List<Curso> findAllSemVideoAulas();
 }

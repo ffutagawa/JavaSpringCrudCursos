@@ -16,4 +16,6 @@ public interface CursoDao {
 
     List<Curso> findAll();
 
+    List<Curso> findAllSemVideoAulas();
+
 }
