@@ -20,6 +20,11 @@ public class CursoServiceImpl implements CursoService {
     @Override
     public void save(Curso curso) {
         dao.save(curso);
+        if (curso.getVideoaulas() != null){
+            curso.getVideoaulas()
+                    .parallelStream()
+                    .forEach(curso::addVideoaula);
+        }
     }
 
     @Override
