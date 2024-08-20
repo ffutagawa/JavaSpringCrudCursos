@@ -24,11 +24,11 @@ public class CursoRestController {
     @Autowired
     private CursoService service;
 
-//    @GetMapping
-//    @ResponseStatus(HttpStatus.OK)
-//    public List<Curso> listar(){
-//        return service.findAll();
-//    }
+    @GetMapping("/listartudo")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Curso> listar(){
+        return service.findAll();
+    }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
