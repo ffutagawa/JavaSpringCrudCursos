@@ -9,7 +9,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "videoaulas")
-public class VideoAula implements Serializable {
+public class Videoaula implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,15 +25,15 @@ public class VideoAula implements Serializable {
     private Integer numero;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonIgnoreProperties({"vidoaulas", "titulo", "cargaHoraria", "dataInicio"})
+    @JsonIgnoreProperties({"videoaulas"})
     @ManyToOne
     @JoinColumn(name = "id_curso_fk")
     private Curso curso;
 
-    public VideoAula() {
+    public Videoaula() {
     }
 
-    public VideoAula(Long id, String titulo, String descricao, Integer numero) {
+    public Videoaula(Long id, String titulo, String descricao, Integer numero) {
         this.id = id;
         this.titulo = titulo;
         this.descricao = descricao;
@@ -84,7 +84,7 @@ public class VideoAula implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        VideoAula videoAula = (VideoAula) o;
+        Videoaula videoAula = (Videoaula) o;
         return Objects.equals(id, videoAula.id);
     }
 
@@ -95,7 +95,7 @@ public class VideoAula implements Serializable {
 
     @Override
     public String toString() {
-        return "VideoAula{" +
+        return "Videoaula{" +
                 "id=" + id +
                 '}';
     }

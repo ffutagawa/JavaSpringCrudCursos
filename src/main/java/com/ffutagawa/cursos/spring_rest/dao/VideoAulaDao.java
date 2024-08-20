@@ -1,18 +1,18 @@
 package com.ffutagawa.cursos.spring_rest.dao;
 
-import com.ffutagawa.cursos.spring_rest.domain.VideoAula;
+import com.ffutagawa.cursos.spring_rest.domain.Videoaula;
 
 import java.util.List;
 
 public interface VideoAulaDao {
 
-    void save (VideoAula videoAula);
+    void save (Videoaula videoAula);
 
-    void update (VideoAula videoAula);
+    void update (Videoaula videoAula);
 
-    void delete (VideoAula videoAula);
+    void delete (Videoaula videoAula);
 
-    VideoAula findByIdVideoAulaAndIdCurso(Long idVideoaula, Long idCurso);
+    Videoaula findByIdVideoAulaAndIdCurso(Long idVideoaula, Long idCurso);
 
-    List<VideoAula> findAllByCurso(Long idCurso, String fields);
+    List<Videoaula> findAllByCurso(Long idCurso, String fields);
 }

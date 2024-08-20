@@ -38,7 +38,7 @@ public class Curso implements Serializable {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonIgnoreProperties({"curso"})
     @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL)
-    private List<VideoAula> videoaulas;
+    private List<Videoaula> videoaulas;
 
     public Curso() {
     }
@@ -82,15 +82,15 @@ public class Curso implements Serializable {
         this.dataInicio = dataInicio;
     }
 
-    public List<VideoAula> getVideoaulas() {
+    public List<Videoaula> getVideoaulas() {
         return videoaulas;
     }
 
-    public void setVideoaulas(List<VideoAula> videoaulas) {
+    public void setVideoaulas(List<Videoaula> videoaulas) {
         this.videoaulas = videoaulas;
     }
 
-    public void addVideoaula(VideoAula videoAula){
+    public void addVideoaula(Videoaula videoAula){
         if (this.videoaulas == null){
             this.videoaulas = new ArrayList<>();
         }

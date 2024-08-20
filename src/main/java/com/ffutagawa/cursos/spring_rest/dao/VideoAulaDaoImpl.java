@@ -1,6 +1,6 @@
 package com.ffutagawa.cursos.spring_rest.dao;
 
-import com.ffutagawa.cursos.spring_rest.domain.VideoAula;
+import com.ffutagawa.cursos.spring_rest.domain.Videoaula;
 import com.ffutagawa.cursos.spring_rest.exception.NaoExisteDaoException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
@@ -16,29 +16,29 @@ public class VideoAulaDaoImpl implements VideoAulaDao{
     private EntityManager entityManager;
 
     @Override
-    public void save(VideoAula videoAula) {
+    public void save(Videoaula videoAula) {
         entityManager.persist(videoAula);
 
     }
 
     @Override
-    public void update(VideoAula videoAula) {
+    public void update(Videoaula videoAula) {
         entityManager.merge(videoAula);
 
     }
 
     @Override
-    public void delete(VideoAula videoAula) {
+    public void delete(Videoaula videoAula) {
         entityManager.remove(videoAula);
 
     }
 
     @Override
-    public VideoAula findByIdVideoAulaAndIdCurso(Long idVideoaula, Long idCurso) {
+    public Videoaula findByIdVideoAulaAndIdCurso(Long idVideoaula, Long idCurso) {
         String query = "select v from Videoaula v where v.id = ?1 and v.curso.id = ?2";
         try {
             return entityManager
-                    .createQuery(query, VideoAula.class)
+                    .createQuery(query, Videoaula.class)
                     .setParameter(1, idVideoaula)
                     .setParameter(2, idCurso)
                     .getSingleResult();
@@ -49,12 +49,13 @@ public class VideoAulaDaoImpl implements VideoAulaDao{
     }
 
     @Override
-    public List<VideoAula> findAllByCurso(Long idCurso, String fields) {
+    public List<Videoaula> findAllByCurso(Long idCurso, String fields) {
         String select = fields.equals("curso")
                 ? "select v"
                 : "select new Videoaula(v.id, v.titulo, v.descricao, v.numero)";
+
         return entityManager
-                .createQuery(select + "from Videoaula v where v.curso.id = ?1", VideoAula.class)
+                .createQuery(select + " from Videoaula v where v.curso.id = ?1", Videoaula.class)
                 .setParameter(1, idCurso)
                 .getResultList();
     }
