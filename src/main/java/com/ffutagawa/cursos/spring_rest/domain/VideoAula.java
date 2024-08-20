@@ -1,5 +1,7 @@
 package com.ffutagawa.cursos.spring_rest.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -22,6 +24,8 @@ public class VideoAula implements Serializable {
     @Column(nullable = false)
     private Integer numero;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonIgnoreProperties({"vidoaulas", "titulo", "cargaHoraria", "dataInicio"})
     @ManyToOne
     @JoinColumn(name = "id_curso_fk")
     private Curso curso;
